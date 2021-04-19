@@ -67,8 +67,8 @@ namespace Api
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers()
-                .RequireAuthorization("ApiScope");
+                endpoints.MapControllers();
+                //.RequireAuthorization("ApiScope");
             });
         }
     }

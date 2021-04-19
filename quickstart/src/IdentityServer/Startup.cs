@@ -72,7 +72,7 @@ namespace IdentityServer
                 endpoints.MapDefaultControllerRoute();
             });
         }
-        private void InitializeDatabase(IApplicationBuilder app)
+        private void InitializeDatabase(IApplicationBuilder app)//to be removed in productioin !!!!
         {
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
