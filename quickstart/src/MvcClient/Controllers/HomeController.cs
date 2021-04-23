@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
@@ -22,15 +23,15 @@ namespace MvcClient.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return View();
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
         }
 
         public async Task<IActionResult>Privacy()
         {
             return View();
-            var accessToken = await HttpContext.GetTokenAsync("access_token");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -45,7 +46,7 @@ namespace MvcClient.Controllers
 
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-            var content = await client.GetStringAsync("https://localhost:6001/identity");
+            var content = await client.GetStringAsync("https://localhost:44337/identity");
 
             ViewBag.Json = JArray.Parse(content).ToString();
             return View("json");

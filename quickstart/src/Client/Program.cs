@@ -1,4 +1,5 @@
 ﻿using IdentityModel.Client;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -30,6 +31,12 @@ namespace Client
                 Console.WriteLine(tokenResponse.Error);
                 return;
             }
+            HttpContext.GetTokenAsync()
+            await client.RequestTokenAsync(
+                new TokenRequest
+                {
+                    
+                });
 
             Console.WriteLine(tokenResponse.Json);
             Console.ReadKey();
