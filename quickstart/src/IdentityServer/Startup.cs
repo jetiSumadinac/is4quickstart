@@ -26,7 +26,7 @@ namespace IdentityServer
         public void ConfigureServices(IServiceCollection services)
         {
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
-            const string connectionString = @"Data Source=DESKTOP-2OMAE54;database=IdentityServer4.Quickstart.EntityFramework-4.1.2;trusted_connection=yes;";
+            const string connectionString = @"Data Source=DESKTOP-06VNES9\SQLEXPRESS;database=IdentityServer4.Quickstart.EntityFramework-4.1.2;trusted_connection=yes;";
             // uncomment, if you want to add an MVC-based UI
             services.AddControllersWithViews();
 
