@@ -1,4 +1,5 @@
 ﻿using IdentityModel;
+using IdentityServer4;
 using IdentityServer4.Models;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,11 @@ namespace identityServer4rawCoding
 {
     public static class Configuration
     {
+        public static IEnumerable<IdentityResource> GetIdentityResources() =>
+            new List<IdentityResource> { 
+                new IdentityResources.OpenId(),
+                new IdentityResources.Profile()
+            };
         public static IEnumerable<ApiResource> GetApis() =>
             new List<ApiResource> {
                 new ApiResource { Name = "ApiOne", Scopes = { "ApiOne"} },
@@ -38,7 +44,11 @@ namespace identityServer4rawCoding
                         new Secret("client_secret_mvc".ToSha256())
                     },
                     AllowedGrantTypes = GrantTypes.Code,
-                    AllowedScopes = { "ApiOne", "ApiTwo"},
+                    AllowedScopes = { 
+                        "ApiOne", 
+                        "ApiTwo", 
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile},
                     RedirectUris = { "https://localhost:44354/" }
                 }
             };
